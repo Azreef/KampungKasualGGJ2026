@@ -43,7 +43,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard Player Movement",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -54,7 +54,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard Player Movement",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -65,7 +65,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard Player Movement",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
