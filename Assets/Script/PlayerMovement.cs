@@ -64,7 +64,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        smoke = Instantiate(jumpEffect, transform.position, Quaternion.identity); 
+        if (jumpEffect != null)
+        {
+            smoke = Instantiate(jumpEffect, transform.position, Quaternion.identity); 
+        }
     }
 
     // Update is called once per frame
