@@ -8,13 +8,13 @@ public class ScreenTransition : MonoBehaviour
     public float duration = 1f;
     public float maxSize = 2000f;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Play();
-        }
-    }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        Play();
+    //    }
+    //}
 
     public void Play()
     {
