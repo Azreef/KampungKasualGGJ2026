@@ -1,38 +1,31 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TorchAudio : MonoBehaviour
 {
-    public AudioClip audioClips;
+    [Header("Audio")]
+    public List<AudioClip> audioClips;
     private AudioSource mAudioSource;
 
-
-    private void Start()
+    void Start()
     {
         mAudioSource = GetComponent<AudioSource>();
     }
 
-    private void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            mAudioSource.PlayOneShot(audioClips);
+            PlayRandomAudio();
         }
     }
-    private void OnDestroy()
-    {
-        PlayRandomAudio();
-    }
+
     void PlayRandomAudio()
     {
-        //if (audioClips.Length == 0)
-        //{
-        //    Debug.LogWarning("Audio Clips array is empty!");
-        //    return;
-        //}
+        if (mAudioSource == null || audioClips == null || audioClips.Count == 0)
+            return;
 
-        //// Pick a random index from the array
-        //int randomIndex = Random.Range(0, audioClips.Length);
-
-        //mAudioSource.PlayOneShot(audioClips[randomIndex]);
+        int randomIndex = Random.Range(0, audioClips.Count);
+        mAudioSource.PlayOneShot(audioClips[randomIndex]);
     }
 }
