@@ -10203,6 +10203,10 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5330959642763031258, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6001898072227150774, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
       propertyPath: m_CompositeOperation
       value: 1
@@ -10222,12 +10226,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 402471065018153296, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1775288258}
+<<<<<<< Updated upstream
     - targetCorrespondingSourceObject: {fileID: 402471065018153296, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1775288264}
     - targetCorrespondingSourceObject: {fileID: 402471065018153296, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1775288263}
+=======
+>>>>>>> Stashed changes
   m_SourcePrefab: {fileID: 100100000, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
 --- !u!4 &1775288255 stripped
 Transform:
@@ -10477,6 +10484,7 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 1775288257}
+<<<<<<< Updated upstream
 --- !u!82 &1775288263
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10595,6 +10603,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4014d23ab87f8e24683d4c63519448ea, type: 3}
   - {fileID: 8300000, guid: a1ed489c101544f47871e531ff987804, type: 3}
   - {fileID: 8300000, guid: 7d16320dba780694384b8e0ddbe1d10c, type: 3}
+=======
+>>>>>>> Stashed changes
 --- !u!4 &1778442401 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6010827026312341715, guid: 346093e95018cca4d940d2252fd150ee, type: 3}
