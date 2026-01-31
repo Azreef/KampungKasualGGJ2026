@@ -22,14 +22,14 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 _moveDirection;
 
-    public float jumpForce;
-    public float maxJumpHoldTime = 0.25f;       
-    public float extraJumpForce = 20f;          
-    public float maxJumpVelocity = 10f;         
+    public float jumpForce = 10.0f;       
     private bool isHoldingJump = false;
-    private float jumpHoldTimer = 0f;
 
-    public float minJumpHeight = 1f;
+    private float hangTimeCounter = 0.0f;
+    public float maxHangTime = 0.2f;
+
+    private float jumpBufferCounter = 0.0f;
+    public float maxJumpBufferTime = 0.2f;
 
     //Ground Check
     private ContactFilter2D groundContactFilter;            
@@ -43,10 +43,8 @@ public class PlayerController : MonoBehaviour
         moveAction = playerInput?.actions.FindAction("Move");
         jumpAction = playerInput?.actions.FindAction("Jump");
 
-  
         groundContactFilter = new ContactFilter2D();
         groundContactFilter.useTriggers = false;
-        
     }
 
     void Start()
@@ -64,31 +62,37 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         PlayerMove();
+        EvaluateJump();
+    }
 
-        
-        if (isHoldingJump)
+    void EvaluateJump()
+    {
+        if (isOnGround)
         {
-            
-            if (jumpHoldTimer < maxJumpHoldTime)
-            {
-                
-                float impulseThisStep = extraJumpForce * Time.fixedDeltaTime;
-                rigidBody.AddForce(Vector2.up * impulseThisStep, ForceMode2D.Impulse);
+            hangTimeCounter = maxHangTime;
+        }
+        else
+        {
+            hangTimeCounter -= Time.deltaTime;
+        }
 
-                jumpHoldTimer += Time.fixedDeltaTime;
+        if (!isHoldingJump)
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
 
-                if (maxJumpVelocity > 0f && rigidBody.linearVelocity.y > maxJumpVelocity)
-                {
-                    rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, maxJumpVelocity);
+        bool isJumping = isHoldingJump && (isOnGround || jumpBufferCounter > 0 || hangTimeCounter > 0);
 
-                    isHoldingJump = false;
-                }
-            }
-            else
-            {
-                
-                isHoldingJump = false;
-            }
+        if (isJumping)
+        {
+            rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumpForce);
+            hangTimeCounter = 0f;
+            jumpBufferCounter = 0f;
+        }
+
+        if(!isHoldingJump && rigidBody.linearVelocity.y > 0)
+        {
+            rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, rigidBody.linearVelocity.y * 0.25f);
         }
     }
 
@@ -117,34 +121,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void JumpStarted(InputAction.CallbackContext obj)
+    private void JumpPressed(InputAction.CallbackContext obj)
     {
-        if (isOnGround)
+        if(isOnGround)
         {
-           
-            rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-
-    
-            float effectiveGravity = -Physics2D.gravity.y * rigidBody.gravityScale;
-            if (effectiveGravity <= 0f)
-            {
-                
-                effectiveGravity = 9.81f;
-            }
-
-            float minJumpVelocity = Mathf.Sqrt(2f * effectiveGravity * Mathf.Max(0f, minJumpHeight));
-
-            
-            if (rigidBody.linearVelocity.y < minJumpVelocity)
-            {
-                rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, minJumpVelocity);
-            }
-
-            isHoldingJump = true;
-            jumpHoldTimer = 0f;
+            jumpBufferCounter = maxJumpBufferTime;
         }
+        
+        isHoldingJump = true;
     }
-    private void JumpEnded(InputAction.CallbackContext obj)
+
+    private void JumpReleased(InputAction.CallbackContext obj)
     {
         isHoldingJump = false;
     }
@@ -155,8 +142,8 @@ public class PlayerController : MonoBehaviour
         jumpAction?.Enable();
         if (jumpAction != null)
         {
-            jumpAction.started += JumpStarted;
-            jumpAction.canceled += JumpEnded;
+            jumpAction.started += JumpPressed;
+            jumpAction.canceled += JumpReleased;
         }    
     }
 
@@ -166,8 +153,8 @@ public class PlayerController : MonoBehaviour
         jumpAction?.Disable();
         if (jumpAction != null)
         {
-            jumpAction.started -= JumpStarted;
-            jumpAction.canceled -= JumpEnded;
+            jumpAction.started -= JumpPressed;
+            jumpAction.canceled -= JumpReleased;
         }  
     }
 }
