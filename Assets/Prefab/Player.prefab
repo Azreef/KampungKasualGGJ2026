@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   groundCheckCollider: {fileID: 134064887228880019}
   characterSpeed: 7
-  characterAcceleration: 13
+  characterAcceleration: 12
   characterDeceleration: 16
   velocityPower: 1
   jumpForce: 2
