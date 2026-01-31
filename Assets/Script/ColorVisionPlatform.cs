@@ -1,46 +1,97 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(TilemapCollider2D  ))]
 public class ColorVisionPlatform : MonoBehaviour
 {
-    SpriteRenderer sr;
+    TilemapRenderer tilemapRenderer;
+    Collider2D tilemapCol;
+    CompositeCollider2D compositeCol;
+
     SpriteMaskInteraction originalMask;
 
-    [SerializeField] private bool isAHidden = false;
+    [Header("Color Vision")]
+    [SerializeField] private VisionColor platformColor;
+
+    bool correctColorActive = false;
+    bool playerInsideScanner = false;
+
 
     void Awake()
     {
-        //sr = GetComponent<SpriteRenderer>();
-        gameObject.SetActive(false);
-        originalMask = sr.maskInteraction;
 
-        if (isAHidden)
-        {
-            sr.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-        }
-        else
-        {
-            sr.maskInteraction = SpriteMaskInteraction.None;
-        }
+        tilemapRenderer = GetComponent<TilemapRenderer>();
+
+        tilemapCol = GetComponent<TilemapCollider2D>();
+        compositeCol = GetComponent<CompositeCollider2D>();
+
+        originalMask = tilemapRenderer.maskInteraction;
+
+        DisableCollision();
     }
 
-    void OnDestroy()
+    void OnEnable()
     {
+        ColorVisionController.OnColorVisionChanged += OnColorChanged;
+        CursorScannerController.OnPlayerScannerStateChanged += OnScannerStateChanged;
+    }
+
+    void OnDisable()
+    {
+        ColorVisionController.OnColorVisionChanged -= OnColorChanged;
+        CursorScannerController.OnPlayerScannerStateChanged -= OnScannerStateChanged;
         RestoreOriginalState();
     }
 
-#if UNITY_EDITOR
-    void OnDisable()
+
+    void OnColorChanged(VisionColor activeColor)
     {
-        // Extra safety for editor state changes
-        if (!Application.isPlaying)
-            RestoreOriginalState();
+        correctColorActive = (activeColor == platformColor);
+
+        // Always respect mask
+        tilemapRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+
+        UpdateCollision();
     }
-#endif
+
+
+
+    void EnableCollision()
+    {
+        if (tilemapCol != null)
+            tilemapCol.enabled = true;
+
+        if (compositeCol != null)
+            compositeCol.enabled = true;
+    }
+
+    void DisableCollision()
+    {
+        if (tilemapCol != null)
+            tilemapCol.enabled = false;
+
+        if (compositeCol != null)
+            compositeCol.enabled = false;
+    }
 
     void RestoreOriginalState()
     {
-        if (sr != null)
-            sr.maskInteraction = originalMask;
+        if (tilemapRenderer != null)
+            tilemapRenderer.maskInteraction = originalMask;
     }
+
+    void OnScannerStateChanged(bool inside)
+    {
+        playerInsideScanner = inside;
+        UpdateCollision();
+    }
+
+    void UpdateCollision()
+    {
+        if (correctColorActive && playerInsideScanner)
+            EnableCollision();
+        else
+            DisableCollision();
+    }
+
 }

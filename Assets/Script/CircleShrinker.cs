@@ -67,7 +67,7 @@ public class CircleShrinker : MonoBehaviour
     }
 
     public void DecreseSize()
-    {
+    {   
         targetScale = Mathf.Max(targetScale - 0.1f, minScale);
     }
 }
