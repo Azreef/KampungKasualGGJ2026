@@ -9,6 +9,7 @@ public class CircleShrinker : MonoBehaviour
     private Vector3 lastPosition;
     private float currentScale;
     private float targetScale;
+    public ScreenTransition transition;
     
     [Header("Shrink Settings")]
     [SerializeField] private float shrinkAmount = 0.01f;
@@ -48,7 +49,7 @@ public class CircleShrinker : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
     }
- 
+
     // Update is called once per frame
     void Update()
     {
@@ -63,11 +64,18 @@ public class CircleShrinker : MonoBehaviour
         {
             IncreaseSize();
         }
-        
-        if(Keyboard.current.leftShiftKey.wasPressedThisFrame)
+
+        if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
         {
             DecreseSize();
         }
+
+        if (currentScale == minScale)
+        {
+            transition.Play();
+        }
+
+
     }
 
     private void ShrinkOnMovement()

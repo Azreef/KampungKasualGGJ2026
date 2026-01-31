@@ -9,6 +9,7 @@ TagManager:
   - Checkpoint
   - FxTemporaire
   - Torch
+  - EndGame
   layers:
   - Default
   - TransparentFX
