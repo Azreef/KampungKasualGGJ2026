@@ -155,7 +155,7 @@ MonoBehaviour:
   jumpForce: 20
   maxHangTime: 0.2
   maxJumpBufferTime: 0.2
-  m_riveWidget: {fileID: 9221966583762458270}
+  RivenWidget: {fileID: 9221966583762458270}
 --- !u!50 &1501428732813775517
 Rigidbody2D:
   serializedVersion: 5
@@ -397,7 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Rive.Runtime.Components::Rive.Components.RiveWidget
   m_rivePanel: {fileID: 3222946725509211406}
-  m_asset: {fileID: -4516626237390682484, guid: d98ae82de32a07f4e89873b9c8ac630c, type: 3}
+  m_asset: {fileID: -4516626237390682484, guid: ef065a96ffc911e41b68d694811e2740, type: 3}
   m_artboardName: Chicky
   m_stateMachineName: State Machine 1
   m_fit: 1
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_hitTestBehavior: 3
   m_eventPoolingMode: 0
   m_speed: 1
-  m_dataBindingMode: 0
+  m_dataBindingMode: 2
   m_viewModelInstanceName: 
   m_customAudioProvider: {fileID: 0}
 --- !u!1 &3546384299143974906

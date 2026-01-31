@@ -5,6 +5,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.LowLevelPhysics2D.PhysicsShape;
 
+public enum MovementState
+{
+    Idle,
+    Run,
+    Jumping,
+    Falling
+}
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Setup")]
@@ -39,7 +46,10 @@ public class PlayerController : MonoBehaviour
 
     private bool isFacingRight = false;
 
-    public RiveWidget m_riveWidget;
+    public RiveWidget RivenWidget;
+    public StateMachine AnimStateMachine;
+
+    MovementState movementState = MovementState.Idle;
 
     private void Awake()
     {
@@ -54,18 +64,17 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
-        StateMachine m_stateMachine = m_riveWidget.StateMachine;
-       
-        m_stateMachine.GetTrigger("Run").Fire();
-        
-
-
+        //StartCoroutine()
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(AnimStateMachine == null)
+        {
+            AnimStateMachine = RivenWidget.StateMachine;
+        }
+
         // Safely read input (works if moveAction is null)
         _moveDirection = moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
         float horizontal = _moveDirection.x;
@@ -80,8 +89,26 @@ public class PlayerController : MonoBehaviour
         }
 
         isOnGround = CheckIsOnGround();
-    }
 
+       
+        //m_stateMachine.GetTrigger("Idle-Run").Fire();
+    }
+    void StartRunAnim()
+    {
+        SMITrigger smTrigger = AnimStateMachine.GetTrigger("Run");
+        if (smTrigger != null)
+        {
+            smTrigger.Fire();
+        }
+    }
+    void StartIdleAnim()
+    {
+        SMITrigger smTrigger = AnimStateMachine.GetTrigger("Idle");
+        if (smTrigger != null)
+        {
+            smTrigger.Fire();
+        }
+    }
     void Flip()
     {
         // Toggle facing state
@@ -135,7 +162,25 @@ public class PlayerController : MonoBehaviour
         float _speedDifferences = _targetSpeed - rigidBody.linearVelocity.x; 
         float _accelerationRate = (Mathf.Abs(_targetSpeed) > 0.01f) ? characterAcceleration : characterDeceleration;
         float _movement = Mathf.Pow(Mathf.Abs(_speedDifferences) * _accelerationRate, velocityPower) * Mathf.Sign(_speedDifferences);
-     
+
+       
+
+        if (Mathf.Abs(_targetSpeed) > 0 && movementState != MovementState.Run)
+        {
+            Debug.Log("RUN:");
+            
+            StartRunAnim();
+            movementState = MovementState.Run;
+        }
+        else if(Mathf.Abs(_targetSpeed) <= 0 && movementState != MovementState.Idle)
+        {
+            Debug.Log("IDLE:");
+            
+            StartIdleAnim();
+            movementState = MovementState.Idle;
+        }
+            
+
         rigidBody.AddForce(new Vector2(_movement, 0f), ForceMode2D.Force);
     }
 
