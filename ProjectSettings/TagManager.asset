@@ -7,6 +7,8 @@ TagManager:
   - Platform
   - Spike
   - Checkpoint
+  - FxTemporaire
+  - Torch
   layers:
   - Default
   - TransparentFX
@@ -14,9 +16,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
+  - 
   - RedPlatform
-  - DisabledRedPlatform
+  - BluePlatform
   - GreenPlatform
   - 
   - 
