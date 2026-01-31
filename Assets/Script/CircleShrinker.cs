@@ -12,7 +12,8 @@ public class CircleShrinker : MonoBehaviour
     [SerializeField] private float movementThreshold = 0.01f;
     [SerializeField] private float minScale = 0.1f;
     [SerializeField] private float maxScale = 1f;
-    
+    [SerializeField] public float rewardScale = 1f;
+
     [Header("Smoothness Settings")]
     [SerializeField] private float scaleSpeed = 8f;
 
@@ -63,7 +64,7 @@ public class CircleShrinker : MonoBehaviour
 
     public void IncreaseSize()
     {
-        targetScale = Mathf.Min(0.39f, maxScale);
+        targetScale = Mathf.Min(rewardScale, maxScale);
     }
 
     public void DecreseSize()
