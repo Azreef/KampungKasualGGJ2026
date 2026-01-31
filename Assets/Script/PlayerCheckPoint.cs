@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 
 public class PlayerCheckPoint : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerCheckPoint : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource audioSource;
+    public ScreenTransition transition;
 
     public List<AudioClip> checkpointClips;
     public List<AudioClip> spikeAudioClips;
@@ -56,6 +58,11 @@ public class PlayerCheckPoint : MonoBehaviour
                 PlayRandomTorchSound();
                 isNearTorch = false;
             }
+        }
+
+        if (collision.CompareTag("EndGame"))
+        {
+            transition.Play();
         }
     }
 
