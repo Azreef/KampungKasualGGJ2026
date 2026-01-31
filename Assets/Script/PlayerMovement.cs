@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(AnimStateMachine == null)
+        if(AnimStateMachine != null)
         {
             AnimStateMachine = RivenWidget.StateMachine;
             runBool = AnimStateMachine.GetBool("Run");
