@@ -10227,12 +10227,15 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1775288258}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     - targetCorrespondingSourceObject: {fileID: 402471065018153296, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1775288264}
     - targetCorrespondingSourceObject: {fileID: 402471065018153296, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1775288263}
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   m_SourcePrefab: {fileID: 100100000, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
@@ -10485,6 +10488,7 @@ CompositeCollider2D:
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 1775288257}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!82 &1775288263
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10603,6 +10607,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4014d23ab87f8e24683d4c63519448ea, type: 3}
   - {fileID: 8300000, guid: a1ed489c101544f47871e531ff987804, type: 3}
   - {fileID: 8300000, guid: 7d16320dba780694384b8e0ddbe1d10c, type: 3}
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!4 &1778442401 stripped
