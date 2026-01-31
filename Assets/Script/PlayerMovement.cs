@@ -3,15 +3,10 @@ using Rive.Components;
 using Rive.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 using static UnityEngine.LowLevelPhysics2D.PhysicsShape;
 
-public enum MovementState
-{
-    Idle,
-    Run,
-    Jumping,
-    Falling
-}
+
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Setup")]
@@ -49,7 +44,12 @@ public class PlayerController : MonoBehaviour
     public RiveWidget RivenWidget;
     public StateMachine AnimStateMachine;
 
-    MovementState movementState = MovementState.Idle;
+    private SMIBool runBool;
+    private SMIBool jumpBool;
+
+    public ParticleSystem runTrailEffect;
+    public ParticleSystem jumpEffect;
+    private ParticleSystem smoke;
 
     private void Awake()
     {
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        //StartCoroutine()
+        smoke = Instantiate(jumpEffect, transform.position, Quaternion.identity); 
     }
 
     // Update is called once per frame
@@ -73,9 +73,11 @@ public class PlayerController : MonoBehaviour
         if(AnimStateMachine == null)
         {
             AnimStateMachine = RivenWidget.StateMachine;
+            runBool = AnimStateMachine.GetBool("Run");
+            jumpBool = AnimStateMachine.GetBool("Jumping");
+            AnimStateMachine.GetNumber("Color").Value = 2;
         }
 
-        // Safely read input (works if moveAction is null)
         _moveDirection = moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
         float horizontal = _moveDirection.x;
 
@@ -89,39 +91,19 @@ public class PlayerController : MonoBehaviour
         }
 
         isOnGround = CheckIsOnGround();
-
-       
-        //m_stateMachine.GetTrigger("Idle-Run").Fire();
     }
-    void StartRunAnim()
-    {
-        SMITrigger smTrigger = AnimStateMachine.GetTrigger("Run");
-        if (smTrigger != null)
-        {
-            smTrigger.Fire();
-        }
-    }
-    void StartIdleAnim()
-    {
-        SMITrigger smTrigger = AnimStateMachine.GetTrigger("Idle");
-        if (smTrigger != null)
-        {
-            smTrigger.Fire();
-        }
-    }
+    
     void Flip()
     {
-        // Toggle facing state
         isFacingRight = !isFacingRight;
 
-        // Preserve original scale magnitudes
         Vector3 currentScale = transform.localScale;
         float scaleX = Mathf.Abs(currentScale.x) * (isFacingRight ? 1f : -1f);
         transform.localScale = new Vector3(scaleX, currentScale.y, currentScale.z);
     }
     void FixedUpdate()
     {
-        PlayerMove();
+        EvaluateMove();
         EvaluateJump();
     }
 
@@ -148,6 +130,15 @@ public class PlayerController : MonoBehaviour
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumpForce);
             hangTimeCounter = 0f;
             jumpBufferCounter = 0f;
+
+            if (smoke != null)
+            {
+                smoke.transform.position = transform.position;
+                smoke.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                smoke.Clear();
+                smoke.Play(); 
+            }
+
         }
 
         if(!isHoldingJump && rigidBody.linearVelocity.y > 0)
@@ -156,32 +147,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void PlayerMove()
+    void EvaluateMove()
     {
         float _targetSpeed = _moveDirection.x * characterSpeed;
         float _speedDifferences = _targetSpeed - rigidBody.linearVelocity.x; 
         float _accelerationRate = (Mathf.Abs(_targetSpeed) > 0.01f) ? characterAcceleration : characterDeceleration;
         float _movement = Mathf.Pow(Mathf.Abs(_speedDifferences) * _accelerationRate, velocityPower) * Mathf.Sign(_speedDifferences);
 
-       
-
-        if (Mathf.Abs(_targetSpeed) > 0 && movementState != MovementState.Run)
+        if (jumpBool != null && !isOnGround)
         {
-            Debug.Log("RUN:");
-            
-            StartRunAnim();
-            movementState = MovementState.Run;
+            jumpBool.Value = true;
         }
-        else if(Mathf.Abs(_targetSpeed) <= 0 && movementState != MovementState.Idle)
-        {
-            Debug.Log("IDLE:");
-            
-            StartIdleAnim();
-            movementState = MovementState.Idle;
-        }
-            
 
-        rigidBody.AddForce(new Vector2(_movement, 0f), ForceMode2D.Force);
+        if (runBool != null && isOnGround)
+        {
+            jumpBool.Value = false;
+            runBool.Value = Mathf.Abs(_targetSpeed) > 0.01f;
+        }
+
+        if (isOnGround && Mathf.Abs(_targetSpeed) > 0.01f && !runTrailEffect.isPlaying)
+        {
+            runTrailEffect.Play();
+        }
+        else if(Mathf.Abs(_targetSpeed) < 0.01f && runTrailEffect.isPlaying)
+        {
+            runTrailEffect.Stop();
+        }
+
+            rigidBody.AddForce(new Vector2(_movement, 0f), ForceMode2D.Force);
     }
 
     bool CheckIsOnGround()
@@ -204,6 +197,7 @@ public class PlayerController : MonoBehaviour
         if(isOnGround)
         {
             jumpBufferCounter = maxJumpBufferTime;
+
         }
         
         isHoldingJump = true;

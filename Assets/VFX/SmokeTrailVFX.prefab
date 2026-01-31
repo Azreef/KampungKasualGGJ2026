@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 237116230597798420}
   - component: {fileID: 949126689606827841}
   m_Layer: 0
-  m_Name: CFXR Fire
+  m_Name: SmokeTrailVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
