@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6784473428119625759}
   - component: {fileID: 1501428732813775517}
   - component: {fileID: 2808058350144537513}
+  - component: {fileID: 3445407979136675289}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -212,6 +213,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player Movement Keyboard
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 7931589677626780110}
+--- !u!114 &3445407979136675289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402471065018153296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bda6fca39708b04b9360488adec4b2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCheckPoint
+  checkpointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2998842728274699305
 GameObject:
   m_ObjectHideFlags: 0

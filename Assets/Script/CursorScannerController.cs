@@ -3,41 +3,38 @@ using System;
 
 public class CursorScannerController : MonoBehaviour
 {
-    [Header("Cursor Parts")]
+    [Header("Scanner")]
     public SpriteRenderer cursorVisual;
     public SpriteMask scannerMask;
+    public Collider2D scannerTrigger;
 
-    bool isEnabled = true;
+    [Header("Player Check")]
+    public LayerMask playerLayer;
+
+    public bool isEnabled = true;
     bool playerInside = false;
 
     public bool IsEnabled => isEnabled;
-    public bool IsPlayerInside => playerInside;
 
     public static Action<bool> OnPlayerScannerStateChanged;
 
-    private void Start()
+    void Awake()
     {
-        scannerMask = GetComponentInChildren<SpriteMask>();
-        cursorVisual = GetComponent<SpriteRenderer>();
+        scannerTrigger = GetComponent<Collider2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void Update()
     {
         if (!isEnabled) return;
 
-        if (other.CompareTag("Player"))
-        {
-            playerInside = true;
-            OnPlayerScannerStateChanged?.Invoke(true);
-        }
-    }
+        bool insideNow = scannerTrigger.OverlapPoint(
+            GameObject.FindGameObjectWithTag("Player").transform.position
+        );
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        if (insideNow != playerInside)
         {
-            playerInside = false;
-            OnPlayerScannerStateChanged?.Invoke(false);
+            playerInside = insideNow;
+            OnPlayerScannerStateChanged?.Invoke(playerInside);
         }
     }
 
@@ -51,10 +48,11 @@ public class CursorScannerController : MonoBehaviour
         if (scannerMask != null)
             scannerMask.enabled = enabled;
 
-        if (!enabled)
+        if (!enabled && playerInside)
         {
             playerInside = false;
             OnPlayerScannerStateChanged?.Invoke(false);
         }
     }
 }
+
