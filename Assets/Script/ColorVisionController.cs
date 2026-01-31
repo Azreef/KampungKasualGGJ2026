@@ -31,6 +31,12 @@ public class ColorVisionController : MonoBehaviour
     int baseMask;
     int currentColorIndex = -1;
 
+    [Header("Cursor Sprites")]
+    public Sprite redCursorSprite;
+    public Sprite blueCursorSprite;
+    public Sprite greenCursorSprite;
+
+
     Camera mainCamera;
 
     void Awake()
@@ -77,33 +83,28 @@ public class ColorVisionController : MonoBehaviour
             return;
 
         if (currentColorIndex == index)
-        {
-            bool wasEnabled = scanner.IsEnabled;
-            scanner.SetScanner(!wasEnabled);
-
-            if (!scanner.IsEnabled)
-            {
-                currentColorIndex = -1;
-                mainCamera.cullingMask = baseMask;
-                OnColorVisionChanged?.Invoke(VisionColor.None);
-            }
-            else
-            {
-                mainCamera.cullingMask =
-                    baseMask | colorLayers[index].layer.value;
-                OnColorVisionChanged?.Invoke((VisionColor)index);
-            }
-
             return;
-        }
 
-        // Switch to new color
         currentColorIndex = index;
 
-        mainCamera.cullingMask =
-            baseMask | colorLayers[index].layer.value;
+        // Update camera culling
+        mainCamera.cullingMask = baseMask | colorLayers[index].layer.value;
 
+        // Enable scanner
         scanner.SetScanner(true);
+
+        // Change cursor sprite
+        if (scanner.cursorVisual != null)
+        {
+            switch (index)
+            {
+                case 0: scanner.cursorVisual.sprite = redCursorSprite; break;
+                case 1: scanner.cursorVisual.sprite = blueCursorSprite; break;
+                case 2: scanner.cursorVisual.sprite = greenCursorSprite; break;
+            }
+        }
+
+        // Notify any listeners
         OnColorVisionChanged?.Invoke((VisionColor)index);
     }
 
