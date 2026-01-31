@@ -76,19 +76,17 @@ public class PlayerController : MonoBehaviour
         {
             smoke = Instantiate(jumpEffect, transform.position, Quaternion.identity); 
         }
+
+        AnimStateMachine = RivenWidget.StateMachine;
+        runBool = AnimStateMachine.GetBool("Run");
+        jumpBool = AnimStateMachine.GetBool("Jumping");
+        AnimStateMachine.GetNumber("Color").Value = 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(AnimStateMachine != null)
-        {
-            AnimStateMachine = RivenWidget.StateMachine;
-            runBool = AnimStateMachine.GetBool("Run");
-            jumpBool = AnimStateMachine.GetBool("Jumping");
-            AnimStateMachine.GetNumber("Color").Value = 2;
-        }
-
+       
         _moveDirection = moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
         float horizontal = _moveDirection.x;
 
