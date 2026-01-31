@@ -37,7 +37,6 @@ public class CircleShrinker : MonoBehaviour
         targetScale = maxScale;
         shrinkingObject.transform.localScale = Vector3.one * currentScale;
 
-        //StartCoroutine(DelayAction(2f));
 
         AnimStateMachine = RivenWidget.StateMachine;
         circleSizeProgress = AnimStateMachine.GetNumber("Progress");
@@ -45,10 +44,6 @@ public class CircleShrinker : MonoBehaviour
         circleSizeProgress.Value = (currentScale / maxScale) * 100;
     }
 
-    IEnumerator DelayAction(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-    }
 
     // Update is called once per frame
     void Update()
@@ -57,8 +52,6 @@ public class CircleShrinker : MonoBehaviour
         ApplySmoothedScale();
 
         circleSizeProgress.Value = (currentScale / maxScale) * 100;
-
-        Debug.Log(circleSizeProgress.Value);
 
         if (Keyboard.current.rightShiftKey.wasPressedThisFrame)
         {
