@@ -533,6 +533,7 @@ GameObject:
   - component: {fileID: 710685730}
   - component: {fileID: 710685729}
   - component: {fileID: 710685728}
+  - component: {fileID: 710685733}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -670,6 +671,23 @@ Transform:
   - {fileID: 231895033}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710685733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710685727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23654f0212a29f542ba82fe75b1513ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CircleShrinker
+  shrinkAmount: 0.01
+  movementThreshold: 0.01
+  minScale: 0.1
+  maxScale: 1
+  scaleSpeed: 8
 --- !u!1 &929517626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,6 +1130,18 @@ PrefabInstance:
     - target: {fileID: 1501428732813775517, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931589677626780110, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931589677626780110, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931589677626780110, guid: 0875c59d5e5dbe94f963a5f28a4d3c19, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
