@@ -1,3 +1,6 @@
+using Rive;
+using Rive.Components;
+using Rive.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.LowLevelPhysics2D.PhysicsShape;
@@ -34,6 +37,10 @@ public class PlayerController : MonoBehaviour
     private Collider2D[] groundContactResult = new Collider2D[5]; 
     private bool isOnGround = false;
 
+    private bool isFacingRight = false;
+
+    public RiveWidget m_riveWidget;
+
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -47,16 +54,44 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+
+        StateMachine m_stateMachine = m_riveWidget.StateMachine;
+       
+        m_stateMachine.GetTrigger("Run").Fire();
         
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        _moveDirection = moveAction.ReadValue<Vector2>();
+        // Safely read input (works if moveAction is null)
+        _moveDirection = moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
+        float horizontal = _moveDirection.x;
+
+        if (Mathf.Abs(horizontal) > 0.01f)
+        {
+            bool desiredFacingRight = horizontal > 0f;
+            if (desiredFacingRight != isFacingRight)
+            {
+                Flip();
+            }
+        }
+
         isOnGround = CheckIsOnGround();
     }
 
+    void Flip()
+    {
+        // Toggle facing state
+        isFacingRight = !isFacingRight;
+
+        // Preserve original scale magnitudes
+        Vector3 currentScale = transform.localScale;
+        float scaleX = Mathf.Abs(currentScale.x) * (isFacingRight ? 1f : -1f);
+        transform.localScale = new Vector3(scaleX, currentScale.y, currentScale.z);
+    }
     void FixedUpdate()
     {
         PlayerMove();
