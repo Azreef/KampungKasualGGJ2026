@@ -31,7 +31,7 @@ public class CircleShrinker : MonoBehaviour
         ShrinkOnMovement();
         ApplySmoothedScale();
 
-        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        if(Keyboard.current.rightShiftKey.wasPressedThisFrame)
         {
             IncreaseSize();
         }
@@ -67,7 +67,7 @@ public class CircleShrinker : MonoBehaviour
     }
 
     public void DecreseSize()
-    {
+    {   
         targetScale = Mathf.Max(targetScale - 0.1f, minScale);
     }
 }

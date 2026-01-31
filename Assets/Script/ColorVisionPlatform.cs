@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(TilemapCollider2D))]
+[RequireComponent(typeof(TilemapCollider2D  ))]
 public class ColorVisionPlatform : MonoBehaviour
 {
     TilemapRenderer tilemapRenderer;
@@ -13,8 +13,13 @@ public class ColorVisionPlatform : MonoBehaviour
     [Header("Color Vision")]
     [SerializeField] private VisionColor platformColor;
 
+    bool correctColorActive = false;
+    bool playerInsideScanner = false;
+
+
     void Awake()
     {
+
         tilemapRenderer = GetComponent<TilemapRenderer>();
 
         tilemapCol = GetComponent<TilemapCollider2D>();
@@ -28,26 +33,27 @@ public class ColorVisionPlatform : MonoBehaviour
     void OnEnable()
     {
         ColorVisionController.OnColorVisionChanged += OnColorChanged;
+        CursorScannerController.OnPlayerScannerStateChanged += OnScannerStateChanged;
     }
 
     void OnDisable()
     {
         ColorVisionController.OnColorVisionChanged -= OnColorChanged;
+        CursorScannerController.OnPlayerScannerStateChanged -= OnScannerStateChanged;
         RestoreOriginalState();
     }
 
+
     void OnColorChanged(VisionColor activeColor)
     {
-        bool isActive = activeColor == platformColor;
+        correctColorActive = (activeColor == platformColor);
 
-        if (isActive)
-            EnableCollision();
-        else
-            DisableCollision();
-
-        // Always respect the mask
+        // Always respect mask
         tilemapRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+
+        UpdateCollision();
     }
+
 
 
     void EnableCollision()
@@ -73,4 +79,19 @@ public class ColorVisionPlatform : MonoBehaviour
         if (tilemapRenderer != null)
             tilemapRenderer.maskInteraction = originalMask;
     }
+
+    void OnScannerStateChanged(bool inside)
+    {
+        playerInsideScanner = inside;
+        UpdateCollision();
+    }
+
+    void UpdateCollision()
+    {
+        if (correctColorActive && playerInsideScanner)
+            EnableCollision();
+        else
+            DisableCollision();
+    }
+
 }
