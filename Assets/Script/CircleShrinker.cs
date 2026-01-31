@@ -31,7 +31,7 @@ public class CircleShrinker : MonoBehaviour
         ShrinkOnMovement();
         ApplySmoothedScale();
 
-        if(Keyboard.current.spaceKey.wasPressedThisFrame)
+        if(Keyboard.current.rightShiftKey.wasPressedThisFrame)
         {
             IncreaseSize();
         }

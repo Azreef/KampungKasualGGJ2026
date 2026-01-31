@@ -10,7 +10,8 @@ public class ColorVisionPlatform : MonoBehaviour
 
     void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
+        //sr = GetComponent<SpriteRenderer>();
+        gameObject.SetActive(false);
         originalMask = sr.maskInteraction;
 
         if (isAHidden)
