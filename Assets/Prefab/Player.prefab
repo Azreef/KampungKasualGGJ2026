@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 5492218615760912286}
   m_Layer: 0
   m_Name: CharacterSprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 9221966583762458270}
   m_Layer: 0
   m_Name: Rive Widget
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
