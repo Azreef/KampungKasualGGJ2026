@@ -210,6 +210,7 @@ MonoBehaviour:
   redCursorSprite: {fileID: 0}
   blueCursorSprite: {fileID: 0}
   greenCursorSprite: {fileID: 0}
+  RivenWidget: {fileID: 8074310048737636022}
 --- !u!114 &3222546307653762873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,7 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Rive.Runtime.Components::Rive.Components.RiveWidget
   m_rivePanel: {fileID: 2922150150914601857}
-  m_asset: {fileID: -4516626237390682484, guid: be0a188edb0f15646be0c8892b2b9c7e, type: 3}
+  m_asset: {fileID: -4516626237390682484, guid: 5c5f1a70a711f784ab3706f5c3b55e22, type: 3}
   m_artboardName: ProgressScope
   m_stateMachineName: State Machine 1
   m_fit: 1
