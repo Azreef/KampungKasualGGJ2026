@@ -8,8 +8,18 @@ public class ColorVisionLayer
     public LayerMask layer;
 }
 
+public enum VisionColor
+{
+    None = -1,
+    Red = 0,
+    Blue = 1,
+    Green = 2
+}
+
 public class ColorVisionController : MonoBehaviour
 {
+    public static System.Action<VisionColor> OnColorVisionChanged;
+
     [Header("Always Visible Layers")]
     public LayerMask alwaysVisibleLayers;
 
@@ -25,12 +35,10 @@ public class ColorVisionController : MonoBehaviour
 
     void Awake()
     {
-        // Auto-find camera
         mainCamera = Camera.main ?? FindObjectOfType<Camera>();
         if (mainCamera == null)
             Debug.LogError("No Camera found in the scene!");
 
-        // Auto-find scanner
         if (scanner == null)
         {
             scanner = FindObjectOfType<CursorScannerController>();
@@ -74,19 +82,29 @@ public class ColorVisionController : MonoBehaviour
             scanner.SetScanner(!wasEnabled);
 
             if (!scanner.IsEnabled)
-                mainCamera.cullingMask = baseMask; 
+            {
+                currentColorIndex = -1;
+                mainCamera.cullingMask = baseMask;
+                OnColorVisionChanged?.Invoke(VisionColor.None);
+            }
             else
+            {
                 mainCamera.cullingMask =
                     baseMask | colorLayers[index].layer.value;
+                OnColorVisionChanged?.Invoke((VisionColor)index);
+            }
 
             return;
         }
 
+        // Switch to new color
         currentColorIndex = index;
 
         mainCamera.cullingMask =
             baseMask | colorLayers[index].layer.value;
 
         scanner.SetScanner(true);
+        OnColorVisionChanged?.Invoke((VisionColor)index);
     }
+
 }

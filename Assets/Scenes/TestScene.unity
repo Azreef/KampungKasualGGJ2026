@@ -544,7 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e507704cb9d6a564aa4a88f7f60cc5d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorVisionPlatform
-  isAHidden: 0
+  isAHidden: 1
 --- !u!1 &1441299321
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,6 +676,10 @@ MonoBehaviour:
     layer:
       serializedVersion: 2
       m_Bits: 256
+  - name: 
+    layer:
+      serializedVersion: 2
+      m_Bits: 512
   scanner: {fileID: 0}
 --- !u!114 &1441299326
 MonoBehaviour:
@@ -811,7 +815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e507704cb9d6a564aa4a88f7f60cc5d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorVisionPlatform
-  isAHidden: 0
+  isAHidden: 1
 --- !u!1 &1990699710
 GameObject:
   m_ObjectHideFlags: 0
