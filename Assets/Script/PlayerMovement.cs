@@ -19,9 +19,7 @@ public class PlayerController : MonoBehaviour
     public float characterDeceleration;
     public float velocityPower;
     
-
     private Vector2 _moveDirection;
-
     public float jumpForce = 10.0f;       
     private bool isHoldingJump = false;
 
