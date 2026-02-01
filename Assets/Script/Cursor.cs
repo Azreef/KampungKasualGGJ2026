@@ -3,7 +3,11 @@ using UnityEngine.InputSystem;
 
 public class Cursor : MonoBehaviour
 {
+    internal static CursorLockMode lockState;
     private Camera mainCamera;
+
+    public static bool visible { get; internal set; }
+
     void Start()
     {
         mainCamera = Camera.main;
