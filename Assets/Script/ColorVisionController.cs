@@ -2,6 +2,7 @@ using Rive;
 using Rive.Components;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [System.Serializable]
 public class ColorVisionLayer
@@ -40,6 +41,8 @@ public class ColorVisionController : MonoBehaviour
 
     public RiveWidget RivenWidget;
     private StateMachine AnimStateMachine;
+
+    [SerializeField] Volume globalVolume;
    
     Camera mainCamera;
 
@@ -71,10 +74,15 @@ public class ColorVisionController : MonoBehaviour
     void Update()   
     {
         if (Input.GetMouseButtonDown(0))
+        {
             HandleColorInput(0);
-
+            globalVolume.weight = 0f;
+        }
         if (Input.GetMouseButtonDown(1))
+        {
             HandleColorInput(1);
+            globalVolume.weight = 1.0f;
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
             HandleColorInput(0);
