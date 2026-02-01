@@ -42,11 +42,11 @@ public class CursorScannerController : MonoBehaviour
     {
         isEnabled = enabled;
 
-        if (cursorVisual != null)
-            cursorVisual.enabled = enabled;
+        //if (cursorVisual != null)
+        //    cursorVisual.enabled = enabled;
 
-        if (scannerMask != null)
-            scannerMask.enabled = enabled;
+        //if (scannerMask != null)
+        //    scannerMask.enabled = enabled;
 
         if (!enabled && playerInside)
         {
