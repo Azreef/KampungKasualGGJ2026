@@ -1,11 +1,15 @@
+using Rive;
+using Rive.Components;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class CircleShrinker : MonoBehaviour
 {
     private Vector3 lastPosition;
     private float currentScale;
     private float targetScale;
+    public ScreenTransition transition;
     
     [Header("Shrink Settings")]
     [SerializeField] private float shrinkAmount = 0.01f;
@@ -17,14 +21,29 @@ public class CircleShrinker : MonoBehaviour
     [Header("Smoothness Settings")]
     [SerializeField] private float scaleSpeed = 8f;
 
+    public RiveWidget RivenWidget;
+    private StateMachine AnimStateMachine;
+    private SMINumber circleSizeProgress;
+
+
+
+    public GameObject shrinkingObject;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        lastPosition = transform.position;
+        lastPosition = shrinkingObject.transform.position;
         currentScale = maxScale;
         targetScale = maxScale;
-        transform.localScale = Vector3.one * currentScale;
+        shrinkingObject.transform.localScale = Vector3.one * currentScale;
+
+
+        AnimStateMachine = RivenWidget.StateMachine;
+        circleSizeProgress = AnimStateMachine.GetNumber("Progress");
+
+        circleSizeProgress.Value = (currentScale / maxScale) * 100;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -32,20 +51,29 @@ public class CircleShrinker : MonoBehaviour
         ShrinkOnMovement();
         ApplySmoothedScale();
 
-        if(Keyboard.current.rightShiftKey.wasPressedThisFrame)
+        circleSizeProgress.Value = (currentScale / maxScale) * 100;
+
+        if (Keyboard.current.rightShiftKey.wasPressedThisFrame)
         {
             IncreaseSize();
         }
-        
-        if(Keyboard.current.leftShiftKey.wasPressedThisFrame)
+
+        if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
         {
             DecreseSize();
         }
+
+        if (currentScale == minScale)
+        {
+            transition.Play();
+        }
+
+
     }
 
     private void ShrinkOnMovement()
     {
-        float distance = Vector3.Distance(transform.position, lastPosition);
+        float distance = Vector3.Distance(shrinkingObject.transform.position, lastPosition);
         
         if (distance > movementThreshold)
         {
@@ -53,13 +81,13 @@ public class CircleShrinker : MonoBehaviour
             targetScale = Mathf.Max(targetScale - shrinkFactor, minScale);
         }
         
-        lastPosition = transform.position;
+        lastPosition = shrinkingObject.transform.position;
     }
 
     private void ApplySmoothedScale()
     {
         currentScale = Mathf.Lerp(currentScale, targetScale, Time.deltaTime * scaleSpeed);
-        transform.localScale = Vector3.one * currentScale;
+        shrinkingObject.transform.localScale = Vector3.one * currentScale;
     }
 
     public void IncreaseSize()

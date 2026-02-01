@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Rive;
+using Rive.Components;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GoalIndicator : MonoBehaviour
@@ -8,19 +10,21 @@ public class GoalIndicator : MonoBehaviour
     public Transform pointA;
     public Transform pointB;
 
-    [Header("UI Reference")]
-    public RectTransform indicator;
-
-    [Header("Meter Positions (UI Anchored Positions)")]
-    public Vector2 startPosition;   // Left side of meter
-    public Vector2 endPosition;     // Right side of meter
-
     private float totalDistance;
+
+    public RiveWidget RivenWidget;
+    private StateMachine AnimStateMachine;
+    private SMINumber goalHeightProgress;
 
     void Start()
     {
         // Calculate total distance once
         totalDistance = Vector3.Distance(pointA.position, pointB.position);
+
+        AnimStateMachine = RivenWidget.StateMachine;
+        goalHeightProgress = AnimStateMachine.GetNumber("ProgressHeight");
+
+        goalHeightProgress.Value = 0;
     }
 
     void Update()
@@ -43,6 +47,9 @@ public class GoalIndicator : MonoBehaviour
         float progress = Mathf.Clamp01(projectedDistance / totalDistance);
 
         // Move indicator in UI
-        indicator.anchoredPosition = Vector2.Lerp(startPosition, endPosition, progress);
+        //indicator.anchoredPosition = Vector2.Lerp(startPosition, endPosition, progress);
+
+        goalHeightProgress.Value = progress * 100;
+        Debug.Log(goalHeightProgress.Value);
     }
 }

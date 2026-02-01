@@ -1,29 +1,107 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 
 public class PlayerCheckPoint : MonoBehaviour
 {
-    // Assign this in the inspector or set it in Start()
     public Vector3 checkpointPosition;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public ScreenTransition transition;
+
+    public List<AudioClip> checkpointClips;
+    public List<AudioClip> spikeAudioClips;
+    public List<AudioClip> torchAudioClips;
+
+    [Header("Spike Settings")]
+    public float spikeSoundCooldown = 0.5f;
+    private bool canPlaySpikeSound = true;
+
+    private bool isNearTorch = false;
 
     void Start()
     {
-        // Initialize checkpointPosition to player's starting position
         checkpointPosition = transform.position;
+        audioSource = GetComponent<AudioSource>();
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Spike"))
         {
-            // Reset player position to checkpoint
-            transform.position = checkpointPosition;
+            if (canPlaySpikeSound)
+            {
+                PlayRandomSpikeSound();
+                StartCoroutine(SpikeSoundCooldown());
+            }
 
-            // Optional: Add other effects like playing sound, animation, or reducing health here
+            transform.position = checkpointPosition;
         }
         else if (collision.CompareTag("Checkpoint"))
         {
-            // Update checkpoint position when player touches a checkpoint
             checkpointPosition = collision.transform.position;
+
+            CheckpointAudio checkpointAudio = collision.GetComponent<CheckpointAudio>();
+            if (checkpointAudio != null && !checkpointAudio.alreadyPlayedOnce)
+            {
+                PlayRandomCheckpointSound();
+                checkpointAudio.alreadyPlayedOnce = true;
+            }
         }
+        else if (collision.CompareTag("Torch"))
+        {
+            if (isNearTorch)
+            {
+                PlayRandomTorchSound();
+                isNearTorch = false;
+            }
+        }
+
+        if (collision.CompareTag("EndGame"))
+        {
+            transition.Play();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Torch"))
+        {
+            isNearTorch = true;
+        }
+    }
+
+    IEnumerator SpikeSoundCooldown()
+    {
+        canPlaySpikeSound = false;
+        yield return new WaitForSeconds(spikeSoundCooldown);
+        canPlaySpikeSound = true;
+    }
+
+    void PlayRandomCheckpointSound()
+    {
+        if (checkpointClips.Count == 0) return;
+        audioSource.PlayOneShot(
+            checkpointClips[Random.Range(0, checkpointClips.Count)]
+        );
+    }
+
+    void PlayRandomSpikeSound()
+    {
+        if (spikeAudioClips.Count == 0) return;
+        audioSource.PlayOneShot(
+            spikeAudioClips[Random.Range(0, spikeAudioClips.Count)]
+        );
+    }
+
+    void PlayRandomTorchSound()
+    {
+        if (torchAudioClips.Count == 0) return;
+        audioSource.PlayOneShot(
+            torchAudioClips[Random.Range(0, torchAudioClips.Count)]
+        );
     }
 }

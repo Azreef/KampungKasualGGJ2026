@@ -1,5 +1,8 @@
-using UnityEngine;
+using Rive;
+using Rive.Components;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 [System.Serializable]
 public class ColorVisionLayer
@@ -36,7 +39,11 @@ public class ColorVisionController : MonoBehaviour
     public Sprite blueCursorSprite;
     public Sprite greenCursorSprite;
 
+    public RiveWidget RivenWidget;
+    private StateMachine AnimStateMachine;
 
+    [SerializeField] Volume globalVolume;
+   
     Camera mainCamera;
 
     void Awake()
@@ -59,13 +66,23 @@ public class ColorVisionController : MonoBehaviour
             scanner.SetScanner(false);
     }
 
+    void Start()
+    {
+        AnimStateMachine = RivenWidget.StateMachine;
+    }
+
     void Update()   
     {
         if (Input.GetMouseButtonDown(0))
+        {
             HandleColorInput(0);
-
+            globalVolume.weight = 0f;
+        }
         if (Input.GetMouseButtonDown(1))
+        {
             HandleColorInput(1);
+            globalVolume.weight = 1.0f;
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
             HandleColorInput(0);
@@ -94,15 +111,13 @@ public class ColorVisionController : MonoBehaviour
         scanner.SetScanner(true);
 
         // Change cursor sprite
-        if (scanner.cursorVisual != null)
+        switch (index)
         {
-            switch (index)
-            {
-                case 0: scanner.cursorVisual.sprite = redCursorSprite; break;
-                case 1: scanner.cursorVisual.sprite = blueCursorSprite; break;
-                case 2: scanner.cursorVisual.sprite = greenCursorSprite; break;
-            }
+            case 0: AnimStateMachine.GetNumber("ColorChange").Value = 1; break;
+            case 1: AnimStateMachine.GetNumber("ColorChange").Value = 2; break;
+            case 2: AnimStateMachine.GetNumber("ColorChange").Value = 3; break;
         }
+        
 
         // Notify any listeners
         OnColorVisionChanged?.Invoke((VisionColor)index);

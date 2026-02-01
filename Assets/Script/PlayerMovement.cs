@@ -1,7 +1,10 @@
 using Rive;
 using Rive.Components;
 using Rive.Utils;
+using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using static UnityEngine.LowLevelPhysics2D.PhysicsShape;
@@ -51,12 +54,17 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem jumpEffect;
     private ParticleSystem smoke;
 
+    public List<AudioClip> jumpAudioClips;
+    private AudioSource AudioSource;
+
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput?.actions.FindAction("Move");
         jumpAction = playerInput?.actions.FindAction("Jump");
+
+        AudioSource = GetComponent<AudioSource>();
 
         groundContactFilter = new ContactFilter2D();
         groundContactFilter.useTriggers = false;
@@ -68,19 +76,17 @@ public class PlayerController : MonoBehaviour
         {
             smoke = Instantiate(jumpEffect, transform.position, Quaternion.identity); 
         }
+
+        AnimStateMachine = RivenWidget.StateMachine;
+        runBool = AnimStateMachine.GetBool("Run");
+        jumpBool = AnimStateMachine.GetBool("Jumping");
+        AnimStateMachine.GetNumber("Color").Value = 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(AnimStateMachine == null)
-        {
-            AnimStateMachine = RivenWidget.StateMachine;
-            runBool = AnimStateMachine.GetBool("Run");
-            jumpBool = AnimStateMachine.GetBool("Jumping");
-            AnimStateMachine.GetNumber("Color").Value = 2;
-        }
-
+       
         _moveDirection = moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
         float horizontal = _moveDirection.x;
 
@@ -133,6 +139,7 @@ public class PlayerController : MonoBehaviour
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumpForce);
             hangTimeCounter = 0f;
             jumpBufferCounter = 0f;
+            PlayRandomJumpSound();
 
             if (smoke != null)
             {
@@ -231,5 +238,13 @@ public class PlayerController : MonoBehaviour
             jumpAction.started -= JumpPressed;
             jumpAction.canceled -= JumpReleased;
         }  
+    }
+
+    void PlayRandomJumpSound()
+    {
+        if (jumpAudioClips.Count == 0) return;
+        AudioSource.PlayOneShot(
+            jumpAudioClips[Random.Range(0, jumpAudioClips.Count)]
+        );
     }
 }
