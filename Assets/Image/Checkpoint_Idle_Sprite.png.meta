@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: c762da5811d067545a8103cb3e21f603
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4789059415658807947
+    second: Checkpoint_Idle_Sprite_0
+  - first:
+      213: -3715542531085131877
+    second: Checkpoint_Idle_Sprite_1
+  - first:
+      213: -7518448172106950338
+    second: Checkpoint_Idle_Sprite_2
+  - first:
+      213: -6014419491739814104
+    second: Checkpoint_Idle_Sprite_3
+  - first:
+      213: -2085406877967069486
+    second: Checkpoint_Idle_Sprite_4
+  - first:
+      213: -8548204764279988617
+    second: Checkpoint_Idle_Sprite_5
+  - first:
+      213: -8012198531265161301
+    second: Checkpoint_Idle_Sprite_6
+  - first:
+      213: -3576988217647521701
+    second: Checkpoint_Idle_Sprite_7
+  - first:
+      213: 555892372747229793
+    second: Checkpoint_Idle_Sprite_8
+  - first:
+      213: 7201628844829441436
+    second: Checkpoint_Idle_Sprite_9
+  - first:
+      213: -8275547334779135938
+    second: Checkpoint_Idle_Sprite_10
+  - first:
+      213: 9153797830928923457
+    second: Checkpoint_Idle_Sprite_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_0
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 40
+        width: 314
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57dba61c5d7d98db0800000000000000
+      internalID: -4789059415658807947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_1
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 40
+        width: 314
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9f90d6f0cdbf6cc0800000000000000
+      internalID: -3715542531085131877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_2
+      rect:
+        serializedVersion: 2
+        x: 1093
+        y: 40
+        width: 314
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e39516fc83b19a790800000000000000
+      internalID: -7518448172106950338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_3
+      rect:
+        serializedVersion: 2
+        x: 1593
+        y: 40
+        width: 314
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 827b9a8865d788ca0800000000000000
+      internalID: -6014419491739814104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_4
+      rect:
+        serializedVersion: 2
+        x: 2093
+        y: 40
+        width: 314
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2decd925e752f03e0800000000000000
+      internalID: -2085406877967069486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_5
+      rect:
+        serializedVersion: 2
+        x: 2593
+        y: 40
+        width: 314
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77e1ac5ae0dae5980800000000000000
+      internalID: -8548204764279988617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_6
+      rect:
+        serializedVersion: 2
+        x: 3093
+        y: 40
+        width: 314
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba79802e2e3fec090800000000000000
+      internalID: -8012198531265161301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_7
+      rect:
+        serializedVersion: 2
+        x: 3593
+        y: 40
+        width: 314
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b50ac51fa2cfb5ec0800000000000000
+      internalID: -3576988217647521701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_8
+      rect:
+        serializedVersion: 2
+        x: 4093
+        y: 40
+        width: 314
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16a92f2fa2de6b700800000000000000
+      internalID: 555892372747229793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_9
+      rect:
+        serializedVersion: 2
+        x: 4593
+        y: 40
+        width: 314
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9df34c474351f360800000000000000
+      internalID: 7201628844829441436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_10
+      rect:
+        serializedVersion: 2
+        x: 5093
+        y: 40
+        width: 314
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e381f847b89572d80800000000000000
+      internalID: -8275547334779135938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Checkpoint_Idle_Sprite_11
+      rect:
+        serializedVersion: 2
+        x: 5593
+        y: 40
+        width: 314
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14b724ad0a2d80f70800000000000000
+      internalID: 9153797830928923457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Checkpoint_Idle_Sprite_0: -4789059415658807947
+      Checkpoint_Idle_Sprite_1: -3715542531085131877
+      Checkpoint_Idle_Sprite_10: -8275547334779135938
+      Checkpoint_Idle_Sprite_11: 9153797830928923457
+      Checkpoint_Idle_Sprite_2: -7518448172106950338
+      Checkpoint_Idle_Sprite_3: -6014419491739814104
+      Checkpoint_Idle_Sprite_4: -2085406877967069486
+      Checkpoint_Idle_Sprite_5: -8548204764279988617
+      Checkpoint_Idle_Sprite_6: -8012198531265161301
+      Checkpoint_Idle_Sprite_7: -3576988217647521701
+      Checkpoint_Idle_Sprite_8: 555892372747229793
+      Checkpoint_Idle_Sprite_9: 7201628844829441436
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
