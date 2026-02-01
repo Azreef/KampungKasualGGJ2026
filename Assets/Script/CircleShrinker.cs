@@ -25,7 +25,7 @@ public class CircleShrinker : MonoBehaviour
     private StateMachine AnimStateMachine;
     private SMINumber circleSizeProgress;
 
-
+    public bool enableDebugControl = false;
 
     public GameObject shrinkingObject;
 
@@ -53,22 +53,23 @@ public class CircleShrinker : MonoBehaviour
 
         circleSizeProgress.Value = (currentScale / maxScale) * 100;
 
-        if (Keyboard.current.rightShiftKey.wasPressedThisFrame)
+        if(enableDebugControl)
         {
-            IncreaseSize();
-        }
+            if (Keyboard.current.rightShiftKey.wasPressedThisFrame)
+            {
+                IncreaseSize();
+            }
 
-        if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
-        {
-            DecreseSize();
+            if (Keyboard.current.leftShiftKey.wasPressedThisFrame)
+            {
+                DecreseSize();
+            }
         }
-
+        
         if (currentScale == minScale)
         {
             transition.Play();
         }
-
-
     }
 
     private void ShrinkOnMovement()

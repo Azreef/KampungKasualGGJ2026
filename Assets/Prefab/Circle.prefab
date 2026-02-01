@@ -207,10 +207,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 512
   scanner: {fileID: 0}
-  redCursorSprite: {fileID: 0}
-  blueCursorSprite: {fileID: 0}
-  greenCursorSprite: {fileID: 0}
   RivenWidget: {fileID: 8074310048737636022}
+  globalVolume: {fileID: 0}
 --- !u!114 &3222546307653762873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80287620897ea84d932c06759973f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CursorScannerController
-  cursorVisual: {fileID: 0}
+  cursorVisual: {fileID: 5289950113266959971}
   scannerMask: {fileID: 0}
   scannerTrigger: {fileID: 0}
   playerLayer:
@@ -242,13 +240,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23654f0212a29f542ba82fe75b1513ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CircleShrinker
-  shrinkAmount: 0.0001
-  movementThreshold: 0.01
+  transition: {fileID: 0}
+  shrinkAmount: 0.001
+  movementThreshold: 0.001
   minScale: 0.1
   maxScale: 1
-  rewardScale: 1
+  rewardScale: 0.9
   scaleSpeed: 8
   RivenWidget: {fileID: 8074310048737636022}
+  enableDebugControl: 0
   shrinkingObject: {fileID: 9023473978226547520}
 --- !u!58 &3619992449979769277
 CircleCollider2D:
@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Rive.Runtime.Components::Rive.Components.RiveWidget
   m_rivePanel: {fileID: 2922150150914601857}
-  m_asset: {fileID: -4516626237390682484, guid: 5c5f1a70a711f784ab3706f5c3b55e22, type: 3}
+  m_asset: {fileID: -4516626237390682484, guid: d3edcda4465229142a6dc36d93739aab, type: 3}
   m_artboardName: ProgressScope
   m_stateMachineName: State Machine 1
   m_fit: 1

@@ -50,6 +50,5 @@ public class GoalIndicator : MonoBehaviour
         //indicator.anchoredPosition = Vector2.Lerp(startPosition, endPosition, progress);
 
         goalHeightProgress.Value = progress * 100;
-        Debug.Log(goalHeightProgress.Value);
     }
 }
