@@ -29,7 +29,15 @@ public class GoalIndicator : MonoBehaviour
 
     void Update()
     {
+
+        if (AnimStateMachine == null)
+        {
+            AnimStateMachine = RivenWidget.StateMachine;
+            goalHeightProgress = AnimStateMachine.GetNumber("ProgressHeight");
+        }
+
         UpdateProgress();
+
     }
 
     void UpdateProgress()

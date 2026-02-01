@@ -48,6 +48,14 @@ public class CircleShrinker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(AnimStateMachine == null)
+        {
+            AnimStateMachine = RivenWidget.StateMachine;
+            circleSizeProgress = AnimStateMachine.GetNumber("Progress");
+
+            circleSizeProgress.Value = (currentScale / maxScale) * 100;
+        }
+        
         ShrinkOnMovement();
         ApplySmoothedScale();
 

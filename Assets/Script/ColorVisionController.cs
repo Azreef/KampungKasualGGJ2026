@@ -73,6 +73,11 @@ public class ColorVisionController : MonoBehaviour
 
     void Update()   
     {
+        if(AnimStateMachine == null)
+        {
+            AnimStateMachine = RivenWidget.StateMachine;
+        }
+        
         if (Input.GetMouseButtonDown(0))
         {
             HandleColorInput(0);
