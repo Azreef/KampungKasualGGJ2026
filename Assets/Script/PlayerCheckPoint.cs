@@ -62,7 +62,7 @@ public class PlayerCheckPoint : MonoBehaviour
 
         if (collision.CompareTag("EndGame"))
         {
-            transition.Play();
+            transition.Win();
         }
     }
 
@@ -104,4 +104,5 @@ public class PlayerCheckPoint : MonoBehaviour
             torchAudioClips[Random.Range(0, torchAudioClips.Count)]
         );
     }
+
 }

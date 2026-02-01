@@ -489,6 +489,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 26243810}
     m_Modifications:
+    - target: {fileID: 6163294675111866339, guid: 3396e9ece1ff440948baa5389e083cbb, type: 3}
+      propertyPath: m_text
+      value: How To Play
+      objectReference: {fileID: 0}
     - target: {fileID: 6812649237268663996, guid: 3396e9ece1ff440948baa5389e083cbb, type: 3}
       propertyPath: m_Name
       value: MainmenuUI
@@ -547,7 +551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7355461630146795467, guid: 3396e9ece1ff440948baa5389e083cbb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Settings
+      value: How to Play
       objectReference: {fileID: 0}
     - target: {fileID: 7355461630146795467, guid: 3396e9ece1ff440948baa5389e083cbb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
