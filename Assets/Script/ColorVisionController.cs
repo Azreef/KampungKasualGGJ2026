@@ -34,10 +34,10 @@ public class ColorVisionController : MonoBehaviour
     int baseMask;
     int currentColorIndex = -1;
 
-    [Header("Cursor Sprites")]
-    public Sprite redCursorSprite;
-    public Sprite blueCursorSprite;
-    public Sprite greenCursorSprite;
+    //[Header("Cursor Sprites")]
+    //public Sprite redCursorSprite;
+    //public Sprite blueCursorSprite;
+    //public Sprite greenCursorSprite;
 
     public RiveWidget RivenWidget;
     private StateMachine AnimStateMachine;
