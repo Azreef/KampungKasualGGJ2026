@@ -65,10 +65,10 @@ public class CircleShrinker : MonoBehaviour
                 DecreseSize();
             }
         }
-        
-        if (currentScale == minScale)
+
+        if(currentScale <= minScale + 0.0001f)
         {
-            transition.Play();
+            transition?.Play();
         }
     }
 
