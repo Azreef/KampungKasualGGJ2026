@@ -7,18 +7,44 @@ public class CheckpointAudio : MonoBehaviour
     private AudioSource mAudioSource;
     public bool alreadyPlayedOnce=false;
 
+    public GameObject activatedSprite;
+    public GameObject idleSprite;
 
     private void Start()
     {
         mAudioSource = GetComponent<AudioSource>();
+
+        //activatedSprite.SetActive(false);
+        //idleSprite.SetActive(true);
+
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (!alreadyPlayedOnce)
+    //    {
+    //        PlayRandomAudio();
+    //        alreadyPlayedOnce = true;
+
+    //        activatedSprite.SetActive(true);
+    //        idleSprite.SetActive(false);
+    //    }
+    //}
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!alreadyPlayedOnce)
+        // Correct: check the collider's tag, don't call SetActive() inside the condition.
+        if (other.CompareTag("Player"))
         {
-            PlayRandomAudio();
-            alreadyPlayedOnce = true;
+            // Play audio once when first triggered (optional, mirrors collision behavior)
+            if (!alreadyPlayedOnce)
+            {
+                PlayRandomAudio();
+                alreadyPlayedOnce = true;
+            }
+
+            activatedSprite?.SetActive(true);
+            idleSprite?.SetActive(false);
         }
     }
 
